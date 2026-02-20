@@ -1,0 +1,39 @@
+{
+  "name": "daiwo-desktop-app",
+  "version": "1.0.0",
+  "description": "App de escritorio para el sitio Daiwo Coffee",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "build:mac": "electron-builder --mac dmg",
+    "build:win": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.daiwo.desktop",
+    "productName": "Daiwo Coffee",
+    "files": [
+      "electron/**/*",
+      "*.html",
+      "*.css",
+      "*.js",
+      "*.png",
+      "docs/**/*"
+    ],
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.business"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    }
+  },
+  "devDependencies": {
+    "electron": "^37.2.3",
+    "electron-builder": "^25.1.8"
+  }
+}
