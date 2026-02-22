@@ -12,4 +12,20 @@ extension Patient {
     @NSManaged public var email: String
     @NSManaged public var address: String
     @NSManaged public var createdAt: Date
+
+    // Relaciones
+    @NSManaged public var consultations: NSSet?
+    @NSManaged public var appointments: NSSet?
+
+    public var consultationsArray: [Consultation] {
+        (consultations as? Set<Consultation> ?? []).sorted { $0.date > $1.date }
+    }
+
+    public var appointmentsArray: [Appointment] {
+        (appointments as? Set<Appointment> ?? []).sorted { $0.date < $1.date }
+    }
+
+    public var upcomingAppointments: [Appointment] {
+        appointmentsArray.filter { $0.date >= Date() && $0.status == "Programada" }
+    }
 }

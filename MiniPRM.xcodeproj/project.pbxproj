@@ -7,34 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0472D46DA1B0BCD2BB35290B /* ConsultationFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21D3124B1FF8004D8AF4AA6 /* ConsultationFormModel.swift */; };
 		27AA7A246A4DF9F9D0690104 /* MiniPRMApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62FEEA2FFD7085654A5A648 /* MiniPRMApp.swift */; };
+		30503223E1FAD99A8DA24DC9 /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB83043449B9917FCD9E3B6 /* PatientDetailView.swift */; };
 		3607ABC848342368D241CC28 /* Patient+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122923241C131358F50DB05A /* Patient+CoreDataClass.swift */; };
 		7A437803C4D67E15A8A42257 /* PatientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F403AF4E183CF11EF4D0B00 /* PatientsView.swift */; };
+		850FEF6666EBE64338FA863A /* Consultation+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA1D0CC80CF453A2EA6BDA5 /* Consultation+CoreData.swift */; };
+		8DA1C266FA8BD127BBAC2A1E /* ConsultationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7A57AF779BE5082A58BB5F /* ConsultationView.swift */; };
 		A39CDE4FAED1CA80E9BB16A3 /* Patient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAE6BF3858908656FE8E8E7 /* Patient+CoreDataProperties.swift */; };
+		B49FCBBA18C2CFD6F6037C8B /* Prescription+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A131D07974D177D4204F4F1 /* Prescription+CoreData.swift */; };
+		D0D508065AD86FDE3C9A7C54 /* Appointment+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FBFAE4B193C0698CFECFF71 /* Appointment+CoreData.swift */; };
+		D1195A268767CC1B4ACDE928 /* ExamOrder+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01032857C8AA130A3DCFBDA /* ExamOrder+CoreData.swift */; };
 		E9FC04A529781ACCED2C57E9 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DFF34D128D88B162DDF398 /* PersistenceController.swift */; };
 		FDB7FFA69884DE3EE6044DF6 /* PatientFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D7DCDACD949298E81DBD004 /* PatientFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AB83043449B9917FCD9E3B6 /* PatientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
 		122923241C131358F50DB05A /* Patient+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Patient+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1FBFAE4B193C0698CFECFF71 /* Appointment+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Appointment+CoreData.swift"; sourceTree = "<group>"; };
 		2AAE6BF3858908656FE8E8E7 /* Patient+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Patient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		3A131D07974D177D4204F4F1 /* Prescription+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Prescription+CoreData.swift"; sourceTree = "<group>"; };
 		41CAE052D6248BE4AC6F2DB9 /* MiniPRM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniPRM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D7DCDACD949298E81DBD004 /* PatientFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientFormView.swift; sourceTree = "<group>"; };
 		6F403AF4E183CF11EF4D0B00 /* PatientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientsView.swift; sourceTree = "<group>"; };
 		99DFF34D128D88B162DDF398 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		B21D3124B1FF8004D8AF4AA6 /* ConsultationFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultationFormModel.swift; sourceTree = "<group>"; };
 		C62FEEA2FFD7085654A5A648 /* MiniPRMApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniPRMApp.swift; sourceTree = "<group>"; };
+		DFA1D0CC80CF453A2EA6BDA5 /* Consultation+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Consultation+CoreData.swift"; sourceTree = "<group>"; };
+		E01032857C8AA130A3DCFBDA /* ExamOrder+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExamOrder+CoreData.swift"; sourceTree = "<group>"; };
+		EB7A57AF779BE5082A58BB5F /* ConsultationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsultationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		3B4657A22896FA2BAFB56E23 /* medicalautomation */ = {
 			isa = PBXGroup;
 			children = (
+				1FBFAE4B193C0698CFECFF71 /* Appointment+CoreData.swift */,
+				DFA1D0CC80CF453A2EA6BDA5 /* Consultation+CoreData.swift */,
+				B21D3124B1FF8004D8AF4AA6 /* ConsultationFormModel.swift */,
+				EB7A57AF779BE5082A58BB5F /* ConsultationView.swift */,
+				E01032857C8AA130A3DCFBDA /* ExamOrder+CoreData.swift */,
 				C62FEEA2FFD7085654A5A648 /* MiniPRMApp.swift */,
 				122923241C131358F50DB05A /* Patient+CoreDataClass.swift */,
 				2AAE6BF3858908656FE8E8E7 /* Patient+CoreDataProperties.swift */,
+				0AB83043449B9917FCD9E3B6 /* PatientDetailView.swift */,
 				5D7DCDACD949298E81DBD004 /* PatientFormView.swift */,
 				6F403AF4E183CF11EF4D0B00 /* PatientsView.swift */,
 				99DFF34D128D88B162DDF398 /* PersistenceController.swift */,
+				3A131D07974D177D4204F4F1 /* Prescription+CoreData.swift */,
 			);
 			name = medicalautomation;
 			path = .;
@@ -109,12 +130,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0D508065AD86FDE3C9A7C54 /* Appointment+CoreData.swift in Sources */,
+				850FEF6666EBE64338FA863A /* Consultation+CoreData.swift in Sources */,
+				0472D46DA1B0BCD2BB35290B /* ConsultationFormModel.swift in Sources */,
+				8DA1C266FA8BD127BBAC2A1E /* ConsultationView.swift in Sources */,
+				D1195A268767CC1B4ACDE928 /* ExamOrder+CoreData.swift in Sources */,
 				27AA7A246A4DF9F9D0690104 /* MiniPRMApp.swift in Sources */,
 				3607ABC848342368D241CC28 /* Patient+CoreDataClass.swift in Sources */,
 				A39CDE4FAED1CA80E9BB16A3 /* Patient+CoreDataProperties.swift in Sources */,
+				30503223E1FAD99A8DA24DC9 /* PatientDetailView.swift in Sources */,
 				FDB7FFA69884DE3EE6044DF6 /* PatientFormView.swift in Sources */,
 				7A437803C4D67E15A8A42257 /* PatientsView.swift in Sources */,
 				E9FC04A529781ACCED2C57E9 /* PersistenceController.swift in Sources */,
+				B49FCBBA18C2CFD6F6037C8B /* Prescription+CoreData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

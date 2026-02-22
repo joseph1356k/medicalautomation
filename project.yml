@@ -14,9 +14,16 @@ targets:
           - MiniPRMApp.swift
           - Patient+CoreDataClass.swift
           - Patient+CoreDataProperties.swift
-          - PatientFormView.swift
-          - PatientsView.swift
+          - Consultation+CoreData.swift
+          - Prescription+CoreData.swift
+          - ExamOrder+CoreData.swift
+          - Appointment+CoreData.swift
           - PersistenceController.swift
+          - ConsultationFormModel.swift
+          - PatientsView.swift
+          - PatientFormView.swift
+          - ConsultationView.swift
+          - PatientDetailView.swift
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.felipemaldonado.MiniPRM

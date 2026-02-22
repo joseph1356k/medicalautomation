@@ -12,9 +12,16 @@ let package = Package(
                 "MiniPRMApp.swift",
                 "Patient+CoreDataClass.swift",
                 "Patient+CoreDataProperties.swift",
-                "PatientFormView.swift",
+                "Consultation+CoreData.swift",
+                "Prescription+CoreData.swift",
+                "ExamOrder+CoreData.swift",
+                "Appointment+CoreData.swift",
+                "PersistenceController.swift",
+                "ConsultationFormModel.swift",
                 "PatientsView.swift",
-                "PersistenceController.swift"
+                "PatientFormView.swift",
+                "ConsultationView.swift",
+                "PatientDetailView.swift",
             ]
         )
     ]
