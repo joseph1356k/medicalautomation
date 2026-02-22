@@ -1,0 +1,24 @@
+name: MiniPRM
+options:
+  bundleIdPrefix: com.felipemaldonado
+  deploymentTarget:
+    macOS: "13.0"
+
+targets:
+  MiniPRM:
+    type: application
+    platform: macOS
+    sources:
+      - path: .
+        includes:
+          - MiniPRMApp.swift
+          - Patient+CoreDataClass.swift
+          - Patient+CoreDataProperties.swift
+          - PatientFormView.swift
+          - PatientsView.swift
+          - PersistenceController.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.felipemaldonado.MiniPRM
+        SWIFT_VERSION: "5.9"
+        MACOSX_DEPLOYMENT_TARGET: "13.0"
