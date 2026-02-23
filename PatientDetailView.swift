@@ -74,31 +74,57 @@ struct PatientDetailView: View {
     // MARK: Panel izquierdo
 
     private var leftPanel: some View {
-        List(selection: $selectedConsultation) {
-            if patient.consultationsArray.isEmpty && patient.upcomingAppointments.isEmpty {
-                Text("Sin historial médico")
-                    .foregroundStyle(.secondary)
-                    .padding()
-            }
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                if patient.consultationsArray.isEmpty && patient.upcomingAppointments.isEmpty {
+                    Text("Sin historial médico")
+                        .foregroundStyle(.secondary)
+                        .padding()
+                }
 
-            if !patient.consultationsArray.isEmpty {
-                Section("Consultas (\(patient.consultationsArray.count))") {
+                if !patient.consultationsArray.isEmpty {
+                    sectionLabel("Consultas (\(patient.consultationsArray.count))")
                     ForEach(patient.consultationsArray) { consultation in
-                        ConsultationListRow(consultation: consultation)
-                            .tag(consultation)
+                        Button {
+                            selectedConsultation = consultation
+                        } label: {
+                            ConsultationListRow(consultation: consultation)
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .background(
+                                    selectedConsultation?.objectID == consultation.objectID
+                                        ? Color.accentColor.opacity(0.12)
+                                        : Color.clear
+                                )
+                        }
+                        .buttonStyle(.plain)
+                        Divider().padding(.leading, 12)
                     }
                 }
-            }
 
-            if !patient.upcomingAppointments.isEmpty {
-                Section("Próximas Citas") {
+                if !patient.upcomingAppointments.isEmpty {
+                    sectionLabel("Próximas Citas")
                     ForEach(patient.upcomingAppointments) { appointment in
                         AppointmentListRow(appointment: appointment)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                        Divider().padding(.leading, 12)
                     }
                 }
             }
         }
-        .listStyle(.sidebar)
+        .background(Color(NSColor.windowBackgroundColor))
+    }
+
+    private func sectionLabel(_ title: String) -> some View {
+        Text(title)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 12)
+            .padding(.top, 14)
+            .padding(.bottom, 4)
     }
 
     // MARK: Panel derecho

@@ -58,7 +58,6 @@ enum ConsultationSection: String, CaseIterable, Identifiable {
 
 // MARK: - Modelo del formulario
 
-@MainActor
 final class ConsultationFormModel: ObservableObject {
 
     // Metadatos

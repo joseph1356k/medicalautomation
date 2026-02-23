@@ -56,12 +56,38 @@ struct ConsultationView: View {
     // MARK: Sidebar
 
     private var sidebarNav: some View {
-        List(ConsultationSection.allCases, selection: $model.selectedSection) { section in
-            Label(section.rawValue, systemImage: section.systemImage)
-                .tag(section)
+        VStack(alignment: .leading, spacing: 2) {
+            ForEach(ConsultationSection.allCases) { section in
+                Button {
+                    model.selectedSection = section
+                } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: section.systemImage)
+                            .frame(width: 18, alignment: .center)
+                        Text(section.rawValue)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 7)
+                    .background(
+                        model.selectedSection == section
+                            ? Color.accentColor.opacity(0.15)
+                            : Color.clear
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .foregroundStyle(
+                        model.selectedSection == section
+                            ? Color.accentColor
+                            : Color.primary
+                    )
+                }
+                .buttonStyle(.plain)
+            }
+            Spacer()
         }
-        .listStyle(.sidebar)
+        .padding(8)
         .frame(width: 200)
+        .background(Color(NSColor.windowBackgroundColor))
     }
 
     // MARK: Contenido
