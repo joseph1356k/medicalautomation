@@ -1,5 +1,22 @@
-import AppKit
 import SwiftUI
+
+// MARK: - Enum para manejar un solo sheet
+
+private enum ActiveSheet: Identifiable {
+    case newPatient
+    case consultation(Patient)
+    case detail(Patient)
+
+    var id: String {
+        switch self {
+        case .newPatient:              return "newPatient"
+        case .consultation(let p):     return "consultation-\(p.objectID.uriRepresentation())"
+        case .detail(let p):           return "detail-\(p.objectID.uriRepresentation())"
+        }
+    }
+}
+
+// MARK: - Vista principal
 
 struct PatientsView: View {
     @FetchRequest(
@@ -10,10 +27,7 @@ struct PatientsView: View {
 
     @Environment(\.managedObjectContext) private var viewContext
     @State private var searchText = ""
-    @State private var selectedPatient: Patient?
-    @State private var isNewPatientSheetPresented = false
-    @State private var isDetailPresented = false
-    @State private var isNewConsultationPresented = false
+    @State private var activeSheet: ActiveSheet?
 
     private var filteredPatients: [Patient] {
         let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -26,8 +40,28 @@ struct PatientsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            SearchField(text: $searchText, placeholder: "Buscar por nombre o documento")
-                .frame(maxWidth: 420)
+            // Buscador nativo SwiftUI (reemplaza NSViewRepresentable)
+            HStack {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(.secondary)
+                TextField("Buscar por nombre o documento", text: $searchText)
+                    .textFieldStyle(.plain)
+                if !searchText.isEmpty {
+                    Button { searchText = "" } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundStyle(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(7)
+            .background(Color(NSColor.controlBackgroundColor))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(NSColor.separatorColor), lineWidth: 1)
+            )
+            .frame(maxWidth: 420)
 
             Table(filteredPatients) {
                 TableColumn("Nombre") { (patient: Patient) in
@@ -64,8 +98,7 @@ struct PatientsView: View {
                 TableColumn("Acciones") { (patient: Patient) in
                     HStack(spacing: 6) {
                         Button {
-                            selectedPatient = patient
-                            isNewConsultationPresented = true
+                            activeSheet = .consultation(patient)
                         } label: {
                             Label("Consultar", systemImage: "stethoscope")
                                 .labelStyle(.titleAndIcon)
@@ -74,8 +107,7 @@ struct PatientsView: View {
                         .controlSize(.small)
 
                         Button {
-                            selectedPatient = patient
-                            isDetailPresented = true
+                            activeSheet = .detail(patient)
                         } label: {
                             Label("Historial", systemImage: "list.bullet.clipboard")
                                 .labelStyle(.titleAndIcon)
@@ -91,56 +123,25 @@ struct PatientsView: View {
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button("Nuevo Paciente") {
-                    isNewPatientSheetPresented = true
+                    activeSheet = .newPatient
                 }
             }
         }
-        .sheet(isPresented: $isNewPatientSheetPresented) {
-            PatientFormView()
-                .environment(\.managedObjectContext, viewContext)
-        }
-        .sheet(isPresented: $isDetailPresented) {
-            if let patient = selectedPatient {
+        // Un solo sheet en lugar de tres separados
+        .sheet(item: $activeSheet) { sheet in
+            switch sheet {
+            case .newPatient:
+                PatientFormView()
+                    .environment(\.managedObjectContext, viewContext)
+
+            case .consultation(let patient):
+                ConsultationView(patient: patient)
+                    .environment(\.managedObjectContext, viewContext)
+
+            case .detail(let patient):
                 PatientDetailView(patient: patient)
                     .environment(\.managedObjectContext, viewContext)
             }
-        }
-        .sheet(isPresented: $isNewConsultationPresented) {
-            if let patient = selectedPatient {
-                ConsultationView(patient: patient)
-                    .environment(\.managedObjectContext, viewContext)
-            }
-        }
-    }
-}
-
-// MARK: - NSSearchField wrapper
-
-private struct SearchField: NSViewRepresentable {
-    @Binding var text: String
-    let placeholder: String
-
-    func makeCoordinator() -> Coordinator { Coordinator(text: $text) }
-
-    func makeNSView(context: Context) -> NSSearchField {
-        let field = NSSearchField(frame: .zero)
-        field.placeholderString = placeholder
-        field.sendsSearchStringImmediately = true
-        field.delegate = context.coordinator
-        return field
-    }
-
-    func updateNSView(_ nsView: NSSearchField, context: Context) {
-        if nsView.stringValue != text { nsView.stringValue = text }
-    }
-
-    final class Coordinator: NSObject, NSSearchFieldDelegate {
-        @Binding private var text: String
-        init(text: Binding<String>) { _text = text }
-
-        func controlTextDidChange(_ notification: Notification) {
-            guard let field = notification.object as? NSSearchField else { return }
-            text = field.stringValue
         }
     }
 }

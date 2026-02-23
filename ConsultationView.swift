@@ -50,7 +50,7 @@ struct ConsultationView: View {
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 12)
-        .background(.regularMaterial)
+        .background(Color(NSColor.controlBackgroundColor))
     }
 
     // MARK: Sidebar
