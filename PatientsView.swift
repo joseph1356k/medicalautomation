@@ -30,19 +30,21 @@ struct PatientsView: View {
                 .frame(maxWidth: 420)
 
             Table(filteredPatients) {
-                TableColumn("Nombre") { patient in
-                    Button(patient.fullName) {
-                        selectedPatient = patient
-                    }
-                    .buttonStyle(.plain)
-                    .fontWeight(selectedPatient?.objectID == patient.objectID ? .semibold : .regular)
+                TableColumn("Nombre") { (patient: Patient) in
+                    Text(patient.fullName)
                 }
-                TableColumn("Documento") { patient in
+                .width(min: 160, ideal: 200)
+
+                TableColumn("Documento") { (patient: Patient) in
                     Text(patient.documentId)
                 }
-                TableColumn("Teléfono") { patient in
+                .width(min: 100, ideal: 120)
+
+                TableColumn("Teléfono") { (patient: Patient) in
                     Text(patient.phone)
                 }
+                .width(min: 100, ideal: 130)
+
                 TableColumn("Consultas") { (patient: Patient) in
                     let count = patient.consultationsArray.count
                     if count > 0 {
@@ -57,27 +59,36 @@ struct PatientsView: View {
                         Text("—").foregroundStyle(.secondary)
                     }
                 }
+                .width(min: 70, ideal: 80, max: 90)
+
+                TableColumn("Acciones") { (patient: Patient) in
+                    HStack(spacing: 6) {
+                        Button {
+                            selectedPatient = patient
+                            isNewConsultationPresented = true
+                        } label: {
+                            Label("Consultar", systemImage: "stethoscope")
+                                .labelStyle(.titleAndIcon)
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+
+                        Button {
+                            selectedPatient = patient
+                            isDetailPresented = true
+                        } label: {
+                            Label("Historial", systemImage: "list.bullet.clipboard")
+                                .labelStyle(.titleAndIcon)
+                        }
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                    }
+                }
+                .width(min: 200, ideal: 220)
             }
         }
         .padding(16)
         .toolbar {
-            if let patient = selectedPatient {
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        isNewConsultationPresented = true
-                    } label: {
-                        Label("Nueva Consulta", systemImage: "stethoscope")
-                    }
-                }
-                ToolbarItem(placement: .primaryAction) {
-                    Button {
-                        isDetailPresented = true
-                    } label: {
-                        Label("Ver Historial (\(patient.fullName.components(separatedBy: " ").first ?? ""))",
-                              systemImage: "list.bullet.clipboard")
-                    }
-                }
-            }
             ToolbarItem(placement: .primaryAction) {
                 Button("Nuevo Paciente") {
                     isNewPatientSheetPresented = true
